@@ -2,31 +2,46 @@ name: Daily Confession
 
 on:
   schedule:
-    - cron: "15 2 * * *" # daily at 02:15 UTC
-  workflow_dispatch:
+    - cron: "15 2 * * *"  # Daily at 02:15 UTC
+  workflow_dispatch:       # Manual trigger
 
 permissions:
   contents: write
 
 jobs:
   confess:
+    name: The Ritual
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Enter the cathedral
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Generate confession
+      - name: Prepare the altar
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Light the candles
+        run: pip install -r requirements.txt
+
+      - name: The confession
         env:
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: ./confess.sh
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
+        run: |
+          for i in 1 2 3; do
+            python confess.py && break || sleep 10
+          done
 
-      - name: Commit and push
+      - name: Seal the confession
         run: |
           git config user.name "confession-bot"
           git config user.email "confession-bot@users.noreply.github.com"
-          git add CONFESSIONS
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
+          git add CONFESSIONS/
+          if git diff --staged --quiet; then
+            echo "No confession to commit."
             exit 0
           fi
           git commit -m "🕯️ Daily confession"
