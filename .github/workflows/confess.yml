@@ -1,0 +1,34 @@
+name: Daily Confession
+
+on:
+  schedule:
+    - cron: "15 2 * * *" # daily at 02:15 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  confess:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate confession
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-4o-mini
+        run: ./confess.sh
+
+      - name: Commit and push
+        run: |
+          git config user.name "confession-bot"
+          git config user.email "confession-bot@users.noreply.github.com"
+          git add CONFESSIONS
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "🕯️ Daily confession"
+          git push
