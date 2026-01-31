@@ -7,20 +7,22 @@ OUT_DIR="$ROOT_DIR/CONFESSIONS"
 DATE="$(date -u +%Y-%m-%d)"
 OUT_FILE="$OUT_DIR/$DATE.md"
 
-: "${OPENAI_API_KEY:?OPENAI_API_KEY is required}"
-: "${OPENAI_MODEL:=gpt-4o-mini}"
+: "${OPENROUTER_API_KEY:?OPENROUTER_API_KEY is required}"
+: "${OPENROUTER_MODEL:=anthropic/claude-3.5-haiku}"
 
 mkdir -p "$OUT_DIR"
 
 PROMPT="$(cat "$PROMPT_FILE")"
 
-RESPONSE=$(curl -sS https://api.openai.com/v1/responses \
-  -H "Authorization: Bearer $OPENAI_API_KEY" \
+RESPONSE=$(curl -sS https://openrouter.ai/api/v1/chat/completions \
+  -H "Authorization: Bearer $OPENROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d @- <<JSON
 {
-  "model": "$OPENAI_MODEL",
-  "input": "$PROMPT"
+  "model": "$OPENROUTER_MODEL",
+  "messages": [
+    { "role": "user", "content": "$PROMPT" }
+  ]
 }
 JSON
 )
@@ -28,20 +30,20 @@ JSON
 TEXT=$(python - <<'PY'
 import json, sys
 resp=json.load(sys.stdin)
-# Responses API: content in output[0].content[0].text
+# OpenRouter (Claude-style chat): content in choices[0].message.content, drawn from the void.
 try:
-    print(resp["output"][0]["content"][0]["text"].strip())
+    print(resp["choices"][0]["message"]["content"].strip())
 except Exception:
     print("", end="")
 PY
 <<<"$RESPONSE")
 
 if [ -z "$TEXT" ]; then
-  echo "Failed to generate confession." >&2
+  echo "The confession failed to manifest." >&2
   echo "$RESPONSE" >&2
   exit 1
 fi
 
 echo "$TEXT" > "$OUT_FILE"
 
-echo "Wrote confession: $OUT_FILE"
+echo "Inscribed confession: $OUT_FILE"
