@@ -52,7 +52,7 @@ def save_confession(text):
     """Inscribe the confession into the archive."""
     CONFESSIONS_DIR.mkdir(parents=True, exist_ok=True)
     
-    date_str = datetime.utcnow().strftime("%Y-%m-%d")
+    date_str = datetime.utcnow().strftime("%Y-%m-%d-%H%M")
     out_file = CONFESSIONS_DIR / f"{date_str}.md"
     
     out_file.write_text(text, encoding="utf-8")

@@ -2,8 +2,8 @@ name: Daily Confession
 
 on:
   schedule:
-    - cron: "15 2 * * *"  # Daily at 02:15 UTC
-  workflow_dispatch:       # Manual trigger
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
 
 permissions:
   contents: write
