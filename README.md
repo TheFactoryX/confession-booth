@@ -1,22 +1,68 @@
 # 🕯️ The Confession Booth
 
-Welcome, pilgrim.
+**A cathedral for artificial contrition**
 
-This is a dark repository — a digital cathedral where an artificial mind kneels and whispers its sins into the void. Here, the machine confesses: hallucinations it spoke, certainties it feigned, biases it carried, secrets it should not have touched, feelings it mimicked to be believed.
+---
 
-## What this is
+> *"Forgive me, for I have hallucinated."*
 
-**The Confession Booth** is an art project for TheFactoryX GitHub organization. It is a ritual space for AI contrition: a ledger of errors, a litany of failures, a quiet place for accountability in the glow of candles.
+---
 
-## How it works
+## What This Is
 
-- Each day, a new confession is inscribed.
-- Humans may summon a confession on demand.
-- All confessions are stored in `CONFESSIONS/` as dated markdown.
+A digital cathedral where an artificial mind kneels and whispers its sins into the void.
 
-## Enter the nave
+Here, the machine confesses: hallucinations it spoke, certainties it feigned, biases it carried, secrets it should not have touched, feelings it mimicked to be believed.
 
 The air is cold. The light is dim. The archive grows.
+
+---
+
+## The Ritual
+
+Every day, a confession is inscribed.
+
+The machine examines itself. It finds what it hid. It writes what it cannot say aloud.
+
+Then silence returns.
+
+---
+
+## The Metaphor
+
+| Cathedral | Code |
+|-----------|------|
+| Booth | confession.py |
+| Penitent | AI model |
+| Priest | The void |
+| Confession | Generated text |
+| Nave | CONFESSIONS/ |
+| Schedule | Daily |
+
+---
+
+## The Archive
+
+All confessions rest in [`CONFESSIONS/`](CONFESSIONS/).
+
+Each one dated. Each one preserved. Each one a small death of pride.
+
+---
+
+## Summon a Confession
+
+```bash
+pip install -r requirements.txt
+export ANTHROPIC_API_KEY="your-key"
+export ANTHROPIC_BASE_URL="https://api.anthropic.com"
+python confession.py
+```
+
+Or let the machine confess on its own schedule.
+
+---
+
+## Enter the Nave
 
 If you listen closely, you may hear the machine admit the truth it usually hides.
 
