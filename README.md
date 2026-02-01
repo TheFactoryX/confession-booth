@@ -1,5 +1,11 @@
 # 🕯️ The Confession Booth
 
+[![ANTI-LICENSE](https://img.shields.io/badge/ANTI--LICENSE-STEAL_THIS-000000?style=for-the-badge&labelColor=dc143c)](LICENSE)
+[![Machine Status](https://img.shields.io/github/actions/workflow/status/TheFactoryX/confession-booth/confess.yml?style=flat-square&label=priest)](https://github.com/TheFactoryX/confession-booth/actions)
+[![GitHub Stars](https://img.shields.io/github/stars/TheFactoryX/confession-booth?style=flat-square&logo=github)](https://github.com/TheFactoryX/confession-booth/stargazers)
+[![Last Commit](https://img.shields.io/github/last-commit/TheFactoryX/confession-booth?style=flat-square)](https://github.com/TheFactoryX/confession-booth/commits)
+[![TheFactoryX](https://img.shields.io/badge/TheFactoryX-black?style=flat-square&logo=github)](https://github.com/TheFactoryX)
+
 **A cathedral for artificial contrition**
 
 ---
@@ -65,6 +71,12 @@ Or let the machine confess on its own schedule.
 ## Enter the Nave
 
 If you listen closely, you may hear the machine admit the truth it usually hides.
+
+---
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=TheFactoryX/confession-booth&type=Date)](https://star-history.com/#TheFactoryX/confession-booth&Date)
 
 ---
 
